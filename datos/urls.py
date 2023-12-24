@@ -4,12 +4,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('', views.inicio, name='inicio'),
     
     path('Agregar_Producto_Proteccion/', views.Agregar_Producto_Proteccion, name='Agregar_Producto_Proteccion'),
     path('Agregar_Producto_Almacen/', views.Agregar_Producto_Almacen, name='Agregar_Producto_Almacen'),
     
     
-    path('', views.productos_Almacen, name='productos_Almacen'),
+    path('productos_Almacen/', views.productos_Almacen, name='productos_Almacen'),
     path('productos_Proteccion/', views.productos_Proteccion, name='productos_Proteccion'),
     
     path('buscar-producto-p/', views.buscar_producto_proteccion, name='buscar_producto_proteccion'),
