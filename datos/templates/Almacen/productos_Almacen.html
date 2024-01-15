@@ -9,10 +9,7 @@
 
 <center>
     <div style="display: flex; justify-content: space-evenly;">
-        <form method="GET" action="{% url 'buscar_producto_almacen' %}">
-            <button type="submit" class="btn btn-primary">Buscar</button>
-            <input type="text" name="q" placeholder="Buscar productos">
-        </form>
+        {% include 'barra_busqueda.html' %}
         <a href="{% url 'productos_Almacen' %}" class="btn">Todo</a>
         <a href="{% url 'Agregar_Producto_Almacen' %}" class="btn">Añadir</a>
 

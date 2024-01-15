@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import buscar_productos
 
 urlpatterns = [
     path('', views.inicio, name='inicio'),
@@ -13,8 +14,7 @@ urlpatterns = [
     path('productos_Almacen/', views.productos_Almacen, name='productos_Almacen'),
     path('productos_Proteccion/', views.productos_Proteccion, name='productos_Proteccion'),
     
-    path('buscar-producto-p/', views.buscar_producto_proteccion, name='buscar_producto_proteccion'),
-    path('buscar-producto-a/', views.buscar_producto_almacen, name='buscar_producto_almacen'),
+    path('buscar/', buscar_productos, name='buscar_productos'),
 
     path('editar-producto-p/<int:producto_id>/editar/', views.editar_producto_Proteccion, name='editar_producto_Proteccion'),
     path('editar-producto-a/<int:producto_id>/editar/', views.editar_producto_almacen, name='editar_producto_almacen'),

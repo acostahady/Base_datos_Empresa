@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Producto_Proteccion, Producto_almacen,RetiroProducto
 from .forms import FormsProducto_Proteccion, FormsProducto_almacen, FormsRetiroProductos
 from collections import Counter
+from django.db.models import Q
+
 
 
 def inicio(request):
@@ -36,19 +38,6 @@ def Agregar_Producto_Almacen(request):
     })
 
 
-def buscar_producto_proteccion(request):
-    query = request.GET.get('q', '')
-    Proteccion = Producto_Proteccion.objects.filter(nombre__icontains=query)
-    return render(request, 'Proteccion/productos_Proteccion.html', {
-        'Proteccion':Proteccion,
-    })
-
-def buscar_producto_almacen(request):
-    query = request.GET.get('q', '')
-    Almacen = Producto_almacen.objects.filter(nombre__icontains=query)
-    return render(request, 'Almacen/productos_Almacen.html', {
-        'Almacen': Almacen,
-    })
 
 
 def productos_Almacen(request):
@@ -63,6 +52,36 @@ def productos_Proteccion(request):
         'productos':productos,
     })
 
+# def buscar_producto_proteccion(request):
+#     query = request.GET.get('q', '')
+#     Proteccion = Producto_Proteccion.objects.filter(nombre__icontains=query)
+#     return render(request, 'Proteccion/productos_Proteccion.html', {
+#         'Proteccion':Proteccion,
+#     })
+
+# def buscar_producto_almacen(request):
+#     query = request.GET.get('q', '')
+#     Almacen = Producto_almacen.objects.filter(nombre__icontains=query)
+#     return render(request, 'Almacen/productos_Almacen.html', {
+#         'Almacen': Almacen,
+#     })
+
+def buscar_productos(request):
+    query = request.GET.get('q', '')
+
+    resultados_proteccion = Producto_Proteccion.objects.filter(
+        Q(nombre__icontains=query)
+    )
+
+    resultados_almacen = Producto_almacen.objects.filter(
+        Q(nombre__icontains=query)
+    )
+
+    return render(request, 'busqueda_resultados.html', {
+        'resultados_proteccion': resultados_proteccion,
+        'resultados_almacen': resultados_almacen,
+        'query': query,
+    })
 
 def editar_producto_Proteccion(request, producto_id):
     producto = get_object_or_404(Producto_Proteccion, pk=producto_id)
