@@ -7,7 +7,8 @@ from django.db.models import Q
 
 
 def inicio(request):
-    titulo = "estas en el inicio"
+    titulo = "Pago de $ 60.000"
+
     return render(request, 'index.html', {
         'titulo':titulo,
     })
